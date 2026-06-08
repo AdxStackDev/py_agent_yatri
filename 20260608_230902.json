@@ -1,0 +1,23 @@
+{
+    "mode_of_travel": [
+        "flight",
+        "bus",
+        "train",
+        "taxi"
+    ],
+    "time_of_travel": [
+        "next Sunday",
+        "next Saturday",
+        "any good day",
+        "next week"
+    ],
+    "current_location": [
+        "Jhansi",
+        "Mumbai"
+    ],
+    "destination": [
+        "Delhi",
+        "Bangalore",
+        "Kohima"
+    ]
+}

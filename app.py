@@ -1,5 +1,6 @@
 import ollama
 import json
+import datetime
 
 user_input = "i want to check flights, buses, train, taxi available from Jhansi to Delhi or from Mumbai to Banglore or to Kohima for next Sunday or next saturday or next week any good day with low price for any."
 
@@ -33,4 +34,12 @@ elif "flight" in travelMedium and "bus" in travelMedium:
     print ("flight", "bus")
 else:
     print ("....")
-print(json.dumps(main_agent, indent=4))
+# print(json.dumps(main_agent, indent=4))
+
+response_time = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+file_name = f"{response_time}.json"
+
+with open(file_name, "w", encoding="utf-8") as file:
+    json.dump(main_agent, file, indent=4)
+
+print ("response saved")

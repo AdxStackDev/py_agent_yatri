@@ -1,0 +1,14 @@
+{
+    "mode_of_travel": [
+        "flight"
+    ],
+    "time_of_travel": [
+        "next Sunday"
+    ],
+    "current_location": [
+        "Jhansi"
+    ],
+    "destination": [
+        "Delhi"
+    ]
+}

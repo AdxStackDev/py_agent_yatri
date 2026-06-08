@@ -2,7 +2,9 @@ import ollama
 import json
 import datetime
 
-user_input = "i want to check flights, buses, train, taxi available from Jhansi to Delhi or from Mumbai to Banglore or to Kohima for next Sunday or next saturday or next week any good day with low price for any."
+import travel_agent
+
+user_input = "i want to check flights available from Jhansi to Delhi for next Sunday."
 
 response = ollama.chat(
     model='qwen2.5-coder:7b',
@@ -25,15 +27,10 @@ Return the answer in JSON format only. Do not edit the user input, just divide i
 
 main_agent = json.loads(response['message']['content'])
 
-travelMedium = main_agent.get('mode_of_travel')
-if travelMedium == "flight":
-    print("flight")
-elif travelMedium == "bus":
-    print("bus")
-elif "flight" in travelMedium and "bus" in travelMedium:
-    print ("flight", "bus")
-else:
-    print ("....")
+check_travel = main_agent.get('mode_of_travel')
+
+if check_travel:
+    print (travel_agent.checkMedium(check_travel))
 # print(json.dumps(main_agent, indent=4))
 
 response_time = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")

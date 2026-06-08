@@ -1,7 +1,7 @@
 import ollama
 import json
 
-user_input = "i want to check flights available from Jhansi to Delhi for next Sunday"
+user_input = "i want to check flights, buses, train, taxi available from Jhansi to Delhi or from Mumbai to Banglore or to Kohima for next Sunday or next saturday or next week any good day with low price for any."
 
 response = ollama.chat(
     model='qwen2.5-coder:7b',
@@ -11,10 +11,10 @@ response = ollama.chat(
             'content': f"""Understand this user input: "{user_input}"
 
 Divide it into these parts:
-1. Mode of travel: write the mode mentioned by the user (bus, train, flight, etc.)
-2. Time of travel: write the date, date with time, or words like next, upcoming, tomorrow, etc input by user.
-3. Current location: write the proper location from which the user wants to travel
-4. Destination: write the proper location where the user wants to go
+1. mode_of_travel: write the mode mentioned by the user (bus, train, flight, etc.). It could be multiple.
+2. time_of_travel: write the date, date with time, or words like next, upcoming, tomorrow, etc input by user. It could be multiple.
+3. current_location: write the proper location from which the user wants to travel. It could be multiple.
+4. destination: write the proper location where the user wants to go. It could be multiple. 
 
 Return the answer in JSON format only. Do not edit the user input, just divide it into parts."""
         }
@@ -24,9 +24,13 @@ Return the answer in JSON format only. Do not edit the user input, just divide i
 
 main_agent = json.loads(response['message']['content'])
 
-if main_agent.get('mode_of_travel') == "flight":
-    print("Working")
+travelMedium = main_agent.get('mode_of_travel')
+if travelMedium == "flight":
+    print("flight")
+elif travelMedium == "bus":
+    print("bus")
+elif "flight" in travelMedium and "bus" in travelMedium:
+    print ("flight", "bus")
 else:
-    print("not working")
-
+    print ("....")
 print(json.dumps(main_agent, indent=4))
